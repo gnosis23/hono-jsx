@@ -1,7 +1,9 @@
+import "dotenv/config";
 import { Hono } from "hono";
 import type { MiddlewareHandler } from "hono";
 import { sign, verify } from "hono/jwt";
 import { deleteCookie, getCookie, setCookie } from "hono/cookie";
+import { serve } from "@hono/node-server";
 import { Page } from "./pages/page";
 import { Top } from "./pages/top";
 import { LoginPage } from "./pages/login";
@@ -96,4 +98,5 @@ app.post("/login", async (c) => {
   return c.html(<LoginPage error="invalid username/password" />);
 });
 
-export default app;
+console.log("start http://localhost:3000");
+serve(app);
